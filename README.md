@@ -20,6 +20,12 @@ Once buildroot is set up and you're in its root directory (`openwrt` by default)
     ln -s env/.config .config
     ln -s env/files files
 
+At this point, you can use `env switch` as described below, but in order to use `env list`, you'll want to create local tracking branches for each remote branch of interest, or use the snippet below to do so for all remote branches:
+
+    cd env
+    for remote in `git branch -r | grep -v /HEAD`; do git checkout --track $remote; done
+    cd ..
+
 ## Usage
 
 ### Applying an existing configuration
