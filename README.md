@@ -16,7 +16,7 @@ To use these configurations with OpenWRT buildroot, first set up your build envi
 
 Once buildroot is set up and you're in its root directory (`openwrt` by default), clone this repository into the `env` directory and create symlinks to the `.config` file and `files` directory:
 
-    git clone iccm.git env
+    git clone https://github.com/IowaCityMesh/iccm-openwrt-config.git env
     ln -s env/.config .config
     ln -s env/files files
 
