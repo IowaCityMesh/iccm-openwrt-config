@@ -38,8 +38,8 @@ network() {
     fi
 
     # add bat0 to main bridge, avoiding duplicates
-    uci del_list network.br-lan.ports='bat0'
-    uci add_list network.br-lan.ports='bat0'
+    uci del_list network.device[0].ports='bat0'
+    uci add_list network.device[0].ports='bat0'
 
     if [ "${nodetype}" = 'server' ]; then
         # class A subnet
@@ -70,7 +70,7 @@ wireless() {
         uci set wireless.@wifi-iface[-1].mode='mesh'
         uci set wireless.@wifi-iface[-1].device="${default_2g}"
         uci set wireless.@wifi-iface[-1].network='bat_hw0'
-        uci set wireless.@wifi-iface[-1].mesh-id='iccm'
+        uci set wireless.@wifi-iface[-1].mesh_id='iccm'
         # TODO: add encryption here
         uci set wireless.@wifi-iface[-1].encryption='none'
         uci set wireless.@wifi-iface[-1].mesh_fwding=0
@@ -151,16 +151,17 @@ fi
 
 # shellcheck disable=1091
 . /lib/functions.sh
-# shellcheck source=./96-iccm-device
-. ./96-iccm-device
+# shellcheck source=./98-iccm-device
+. ./98-iccm-device
 
-# set default devices if not set by 96-iccm-device
+# set default devices if not set by 98-iccm-device
 if [ -z "${default_2g}" ] || [ -z "${default_5g}" ]; then
     config_load wireless
     config_foreach get_default_wifi "wifi-device"
 fi
 
 # deanonymize br-lan for readability
+# OOPS this does nothing because UCI is bad
 if [ "$(uci get network.@device[0].name)" = 'br-lan' ]; then
     uci rename network.@device[0]='br-lan'
 fi

@@ -4,6 +4,6 @@ export default_2g='radio0'
 export default_5g=''
 
 # 97-iccm-general expects:
-#   network.@device[0].name='br-lan' (it will deanonymize it)
+#   network.@device[0].name='br-lan'
 #   network.lan.device='br-lan'
 # These should typically be true of default OpenWRT, but if they aren't, fix them here.
