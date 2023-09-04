@@ -38,8 +38,8 @@ network() {
     fi
 
     # add bat0 to main bridge, avoiding duplicates
-    uci del_list network.device[0].ports='bat0'
-    uci add_list network.device[0].ports='bat0'
+    uci del_list network.@device[0].ports='bat0'
+    uci add_list network.@device[0].ports='bat0'
 
     if [ "${nodetype}" = 'server' ]; then
         # class A subnet
